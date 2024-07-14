@@ -1,34 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { Routes, Route, BrowserRouter, Link, Outlet } from 'react-router-dom'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import './index.css'
-
-// TODO: Move this to its own file and add proper styling
-function Layout() {
-  return (
-    <div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/create-booking">About</Link>
-          </li>
-          <li>
-            <Link to="/edit-booking/1">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/nothing-here">Nothing Here</Link>
-          </li>
-        </ul>
-      </nav>
-
-      <hr />
-      <Outlet />
-    </div>
-  )
-}
+import Layout from './components/layout/layout'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
