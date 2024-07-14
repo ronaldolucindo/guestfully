@@ -2,6 +2,7 @@ import Typography from '@/components/typography/typography'
 import BookingCard from './components/booking-card/booking-card'
 import houseImage from '@/assets/vacation-house.jpg'
 import { Link } from 'react-router-dom'
+import Button from '@/components/button/button'
 
 const Bookings = (): React.JSX.Element => {
   return (
@@ -9,7 +10,7 @@ const Bookings = (): React.JSX.Element => {
       <div className="mb-4 flex items-center justify-between">
         <Typography variant="h2">My Bookings</Typography>
         <Link to="/create-booking">
-          <button>Create Booking</button>
+          <Button>Create Booking</Button>
         </Link>
       </div>
       <div className="flex flex-col space-y-4">
