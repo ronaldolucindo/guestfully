@@ -3,8 +3,11 @@ import BookingCard from './components/booking-card/booking-card'
 import houseImage from '@/assets/vacation-house.jpg'
 import { Link } from 'react-router-dom'
 import Button from '@/components/button/button'
+import ConfirmationDialog from '@/components/confirmation-dialog/confirmation-dialog'
+import { useState } from 'react'
 
 const Bookings = (): React.JSX.Element => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
   return (
     <>
       <div className="mb-4 flex items-center justify-between">
@@ -21,7 +24,7 @@ const Bookings = (): React.JSX.Element => {
           endDate={new Date('2024-06-28')}
           price={1920}
           onEdit={() => 1}
-          onDelete={() => 1}
+          onDelete={() => setIsDialogOpen(true)}
         />
         <BookingCard
           title="Vacation house"
@@ -30,9 +33,17 @@ const Bookings = (): React.JSX.Element => {
           endDate={new Date('2024-06-28')}
           price={1920}
           onEdit={() => 1}
-          onDelete={() => 1}
+          onDelete={() => setIsDialogOpen(true)}
         />
       </div>
+      <ConfirmationDialog
+        isOpen={isDialogOpen}
+        onClose={() => setIsDialogOpen(false)}
+        title="Delete Booking"
+        description="Are you sure you want to delete your booking? All of your data will be permanently removed."
+        onCancel={() => 0}
+        onConfirm={() => 1}
+      />
     </>
   )
 }
