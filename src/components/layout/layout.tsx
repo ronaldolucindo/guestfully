@@ -5,7 +5,7 @@ const Layout = (): React.JSX.Element => {
   return (
     <>
       <Header />
-      <main className="m-auto w-full px-4 lg:w-4/5">
+      <main className="m-auto w-full px-4 pb-16 xl:w-4/5">
         <Outlet />
       </main>
     </>
