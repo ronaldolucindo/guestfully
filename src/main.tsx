@@ -1,11 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Routes, Route, BrowserRouter } from 'react-router-dom'
-import './index.css'
 import Layout from './components/layout/layout'
 import Bookings from './pages/bookings/bookings'
 import CreateBooking from './pages/create-booking/create-booking'
 import NotFound from './pages/not-found/not-found'
+import './index.css'
+import 'react-image-gallery/styles/css/image-gallery.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
