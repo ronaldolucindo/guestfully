@@ -7,6 +7,7 @@ import CreateBooking from './pages/create-booking/create-booking'
 import NotFound from './pages/not-found/not-found'
 import './index.css'
 import 'react-image-gallery/styles/css/image-gallery.css'
+import 'react-datepicker/dist/react-datepicker.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

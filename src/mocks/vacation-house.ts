@@ -10,6 +10,7 @@ const VACATION_HOUSE_MOCK = {
   guests: 6,
   bedrooms: 3,
   bathrooms: 3,
+  price: 989.99,
   amenities: [
     'toaster',
     'toiletries',
@@ -22,7 +23,7 @@ const VACATION_HOUSE_MOCK = {
     'conditioner',
     'desk',
     'fridge',
-    'internet',
+    'wardrobe',
   ],
   description:
     'Welcome to Mar Azul House, your private oasis by the turquoise waters of Salvador’s coastline. Nestled amidst swaying palm trees and overlooking the pristine Barra Beach, this beachfront retreat offers an idyllic escape for travelers seeking tranquility and sun-kissed days.',
