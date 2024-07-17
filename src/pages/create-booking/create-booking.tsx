@@ -2,10 +2,10 @@ import Typography from '@/components/typography/typography'
 import PropertyDetails from './components/property-details/property-details'
 import BookingForm from './components/booking-form/booking-form'
 import VACATION_HOUSE_MOCK from '@/mocks/vacation-house'
+import { Booking } from '@/types/booking'
 
 type CreateBookingProps = {
-  // TODO: Fix booking type
-  booking?: string
+  booking?: Booking
 }
 const CreateBooking = ({ booking }: CreateBookingProps): React.JSX.Element => {
   const isEditingBooking = Boolean(booking)
@@ -18,7 +18,7 @@ const CreateBooking = ({ booking }: CreateBookingProps): React.JSX.Element => {
         <PropertyDetails property={VACATION_HOUSE_MOCK} />
         <BookingForm
           pricePerNight={VACATION_HOUSE_MOCK.price}
-          booking="1"
+          booking={booking}
           maxGuests={6}
           // onSubmit={() => 1}
         />
