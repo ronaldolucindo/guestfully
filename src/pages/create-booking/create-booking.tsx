@@ -16,7 +16,12 @@ const CreateBooking = ({ booking }: CreateBookingProps): React.JSX.Element => {
       </Typography>
       <div className="relative mt-4 flex flex-col justify-between md:flex-row md:space-x-12">
         <PropertyDetails property={VACATION_HOUSE_MOCK} />
-        <BookingForm booking="1" onSubmit={() => 1} />
+        <BookingForm
+          pricePerNight={VACATION_HOUSE_MOCK.price}
+          booking="1"
+          maxGuests={6}
+          // onSubmit={() => 1}
+        />
       </div>
     </div>
   )
