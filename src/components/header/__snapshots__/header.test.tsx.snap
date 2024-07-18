@@ -1,0 +1,5 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Header > matches the logo 1`] = `"Guestfully"`;
+
+exports[`Header > matches the logo 2`] = `"/src/assets/logo.jpg"`;

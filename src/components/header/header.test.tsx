@@ -10,4 +10,18 @@ describe('Header', () => {
     )
     expect(screen.getByTestId('Header.logo').getAttribute('alt')).toBeTruthy()
   })
+  it('matches the logo', () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>,
+    )
+
+    expect(
+      screen.getByTestId('Header.logo').getAttribute('alt'),
+    ).toMatchSnapshot()
+    expect(
+      screen.getByTestId('Header.logo').getAttribute('src'),
+    ).toMatchSnapshot()
+  })
 })
