@@ -5,6 +5,7 @@ import VACATION_HOUSE_MOCK from '@/mocks/vacation-house'
 import { Booking } from '@/types/booking'
 import { useBookingsStore } from '@/stores/bookings'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useEffect } from 'react'
 
 type CreateBookingProps = {
   isEditing?: boolean
@@ -28,6 +29,13 @@ const CreateBooking = ({
     saveBooking(booking)
     return navigate('/')
   }
+
+  useEffect(() => {
+    // should redirect to booking creation if user enter invalid url bookingID
+    if (isEditing && !bookingToEdit) {
+      navigate('/create-booking')
+    }
+  }, [bookingToEdit, isEditing, navigate])
 
   return (
     <div>
