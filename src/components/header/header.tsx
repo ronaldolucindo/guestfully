@@ -10,6 +10,7 @@ const Header = (): React.JSX.Element => {
             className="h-10 w-auto opacity-80 mix-blend-darken lg:h-16"
             src={logo}
             alt="Guestfully"
+            data-testid="Header.logo"
           />
         </Link>
       </div>
