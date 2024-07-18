@@ -20,6 +20,7 @@ type BookingFormProps = {
 
 const BookingForm = ({
   property,
+  booking,
   bookedDates,
   onSubmit,
 }: BookingFormProps): React.JSX.Element => {
@@ -32,15 +33,11 @@ const BookingForm = ({
     watch,
     formState: { errors },
   } = useForm<Booking>({
-    defaultValues: {
-      guests: 1,
-      note: '',
-      date: [undefined, undefined],
-    },
+    defaultValues: booking ?? {},
   })
 
   const guestOptions = Array.from({ length: property.guests }, (_x, i) => i + 1)
-  const [startDate, endDate] = watch('date')
+  const [startDate, endDate] = watch('date') ?? []
   const dateLimit = startDate ? addDays(startDate, 60) : undefined
   const numberOfNights =
     startDate && endDate ? differenceInDays(endDate, startDate) : 0
@@ -94,7 +91,7 @@ const BookingForm = ({
           )}
         </div>
         <Field className="my-2">
-          <Label className="text-sm font-bold">Date</Label>
+          <Typography className="text-sm font-bold">Date*</Typography>
           <div className="w-full">
             <Controller
               name="date"

@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
           <Route path="create-booking" element={<CreateBooking />} />
           <Route
             path="edit-booking/:bookingId"
-            element={<CreateBooking booking="1" />}
+            element={<CreateBooking isEditing />}
           />
           <Route path="*" element={<NotFound />} />
         </Route>

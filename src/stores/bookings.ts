@@ -7,6 +7,7 @@ type BookingsState = {
   addBooking: (booking: Booking) => void
   deleteBooking: (booking: Booking) => void
   editBooking: (booking: Booking) => void
+  getBooking: (id: string) => Booking | undefined
   getBookedDates: () => DateInterval[]
 }
 
@@ -35,6 +36,7 @@ export const useBookingsStore = create<BookingsState>()((set, get) => ({
       bookings: bookingsCopy,
     }))
   },
+  getBooking: (id) => get().bookings.find((booking) => booking.id === id),
   getBookedDates: () =>
     get().bookings.map((booking) => ({
       start: booking.date[0],

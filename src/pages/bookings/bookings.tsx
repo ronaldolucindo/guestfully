@@ -1,6 +1,6 @@
 import Typography from '@/components/typography/typography'
 import BookingCard from './components/booking-card/booking-card'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Button from '@/components/button/button'
 import ConfirmationDialog from '@/components/confirmation-dialog/confirmation-dialog'
 import { useState } from 'react'
@@ -9,6 +9,7 @@ import { InformationCircleIcon } from '@heroicons/react/16/solid'
 import { Booking } from '@/types/booking'
 
 const Bookings = (): React.JSX.Element => {
+  const navigate = useNavigate()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const [selectedBooking, setSelectedBooking] = useState<Booking>()
   const bookings = useBookingsStore((state) => state.bookings)
@@ -17,6 +18,10 @@ const Bookings = (): React.JSX.Element => {
   const handleDeleteClick = (booking: Booking) => {
     setIsDialogOpen(true)
     setSelectedBooking(booking)
+  }
+
+  const handleEditClick = (bookingId: string) => {
+    navigate(`edit-booking/${bookingId}`)
   }
 
   return (
@@ -40,7 +45,7 @@ const Bookings = (): React.JSX.Element => {
           <BookingCard
             key={booking.id}
             booking={booking}
-            onEdit={() => 1}
+            onEdit={() => handleEditClick(booking.id)}
             onDelete={() => handleDeleteClick(booking)}
           />
         ))}
