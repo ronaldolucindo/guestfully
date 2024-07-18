@@ -166,7 +166,11 @@ const BookingForm = ({
             )}
           />
         </Field>
-        <Button type="submit" variant="rounded">
+        <Button
+          type="submit"
+          variant="rounded"
+          data-testid="BookingForm.bookBtn"
+        >
           Book now
         </Button>
       </form>

@@ -1,22 +1,10 @@
 import { render, screen } from '@testing-library/react'
 import BookingCard from './booking-card'
 import { vitest } from 'vitest'
-import { Booking } from '@/types/booking'
+import { BOOKING_MOCK } from '@/mocks/booking'
 
 const cardProps = {
-  booking: {
-    id: 'id',
-    guests: 3,
-    note: '',
-    totalPrice: 900.9877,
-    date: [new Date(), new Date()],
-    property: {
-      id: 'pId',
-      name: 'pName',
-      address: 'pAddress',
-      image: 'imageUrl',
-    },
-  } satisfies Booking,
+  booking: BOOKING_MOCK,
   onEdit: vitest.fn(),
   onDelete: vitest.fn(),
 }
