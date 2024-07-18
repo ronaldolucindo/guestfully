@@ -68,7 +68,7 @@ const BookingForm = ({
   }
 
   return (
-    <div className="md:p-x-8 flex h-4/5 w-full flex-col rounded-lg bg-white p-4 shadow-md md:sticky md:top-24">
+    <div className="md:p-x-8 mt-8 flex h-4/5 w-full flex-col rounded-lg bg-white p-4 shadow-md md:sticky md:top-24 md:mt-0">
       <form
         className="w-full"
         noValidate
