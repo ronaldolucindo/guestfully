@@ -34,7 +34,12 @@ const ConfirmationDialog = ({
   }
 
   return (
-    <Dialog open={isOpen} onClose={onClose} className="relative z-50">
+    <Dialog
+      open={isOpen}
+      onClose={onClose}
+      className="relative z-50"
+      data-testid="ConfirmationDialog"
+    >
       <DialogBackdrop className="fixed inset-0 bg-black/30" />
       <div className="fixed inset-0 flex w-screen items-center justify-center py-4">
         <DialogPanel className="max-w-lg space-y-8 rounded-md bg-white p-8 shadow-sm">
@@ -43,10 +48,18 @@ const ConfirmationDialog = ({
           </DialogTitle>
           <Description>{description}</Description>
           <div className="flex justify-end gap-4">
-            <Button variant="text" onClick={handleCancel}>
+            <Button
+              variant="text"
+              onClick={handleCancel}
+              data-testid="ConfirmationDialog.cancelBtn"
+            >
               Cancel
             </Button>
-            <Button variant="danger" onClick={handleConfirm}>
+            <Button
+              variant="danger"
+              onClick={handleConfirm}
+              data-testid="ConfirmationDialog.confirmBtn"
+            >
               Confirm
             </Button>
           </div>
