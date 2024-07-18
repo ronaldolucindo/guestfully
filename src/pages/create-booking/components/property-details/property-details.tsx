@@ -1,11 +1,11 @@
 import ImageGallery from 'react-image-gallery'
 import Typography from '@/components/typography/typography'
-import VACATION_HOUSE_MOCK from '@/mocks/vacation-house'
 import GuestInfo from '../guest-info/guest-info'
 import Amenities from '../amenities/amenities'
+import { Property } from '@/types/property'
 
 type PropertyDetailsProps = {
-  property: typeof VACATION_HOUSE_MOCK
+  property: Property
 }
 
 const PropertyDetails = ({

@@ -34,10 +34,9 @@ const CreateBooking = ({
       <div className="relative mt-4 flex flex-col justify-between md:flex-row md:space-x-12">
         <PropertyDetails property={VACATION_HOUSE_MOCK} />
         <BookingForm
-          pricePerNight={VACATION_HOUSE_MOCK.price}
+          property={VACATION_HOUSE_MOCK}
           booking={booking}
           bookedDates={bookedDates()}
-          maxGuests={6}
           onSubmit={handleSaveBooking}
         />
       </div>

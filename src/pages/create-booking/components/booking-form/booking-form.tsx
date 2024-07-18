@@ -8,18 +8,17 @@ import DatePicker from 'react-datepicker'
 import { differenceInDays } from 'date-fns/differenceInDays'
 import { addDays } from 'date-fns/addDays'
 import { areIntervalsOverlapping } from 'date-fns/areIntervalsOverlapping'
+import { Property } from '@/types/property'
 
 type BookingFormProps = {
   booking?: Booking
-  pricePerNight: number
-  maxGuests: number
+  property: Property
   bookedDates: DateInterval[]
   onSubmit: (data: Booking) => void
 }
 
 const BookingForm = ({
-  pricePerNight,
-  maxGuests,
+  property,
   bookedDates,
   onSubmit,
 }: BookingFormProps): React.JSX.Element => {
@@ -35,17 +34,16 @@ const BookingForm = ({
     defaultValues: {
       guests: 1,
       note: '',
-      totalPrice: 0,
       date: [undefined, undefined],
     },
   })
 
-  const guestOptions = Array.from({ length: maxGuests }, (_x, i) => i + 1)
+  const guestOptions = Array.from({ length: property.guests }, (_x, i) => i + 1)
   const [startDate, endDate] = watch('date')
   const dateLimit = startDate ? addDays(startDate, 60) : undefined
   const numberOfNights =
     startDate && endDate ? differenceInDays(endDate, startDate) : 0
-  const total = numberOfNights * pricePerNight
+  const total = numberOfNights * property.price
   const isDateSelected = (date: Booking['date']) => Boolean(date[0] && date[1])
 
   const areOverlapping = (date: [Date | null, Date | null]) =>
@@ -56,6 +54,15 @@ const BookingForm = ({
       ),
     )
 
+  const beforeSubmit = (data: Booking) => {
+    const bookingData = {
+      ...data,
+      totalPrice: total,
+      propertyName: property.name,
+    }
+    onSubmit(bookingData)
+  }
+
   return (
     <div className="md:p-x-8 flex h-4/5 w-full flex-col rounded-lg bg-white p-4 shadow-md md:sticky md:top-24">
       <form
@@ -63,11 +70,11 @@ const BookingForm = ({
         noValidate
         onSubmit={(e) => {
           e.preventDefault()
-          void handleSubmit(onSubmit)(e)
+          void handleSubmit(beforeSubmit)(e)
         }}
       >
         <Typography className="text-lg font-bold">
-          $ {pricePerNight}{' '}
+          $ {property.price}{' '}
           <Typography className="text-sm font-bold" variant="span">
             / night
           </Typography>
