@@ -4,6 +4,7 @@ type ImageAddress = {
 }
 
 export type Property = {
+  id: string
   name: string
   subtitle: string
   address: string

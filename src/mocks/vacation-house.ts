@@ -4,6 +4,7 @@ import livingroom from '@/assets/living-room.jpg'
 import kitchen from '@/assets/kitchen.jpg'
 
 const VACATION_HOUSE_MOCK = {
+  id: '21343',
   name: 'Mar Azul House',
   subtitle: 'Beach house with an amazing view to the ocean',
   address: '1010 Main Street, Salvador - Bahia - Brazil',

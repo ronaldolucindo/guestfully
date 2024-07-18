@@ -58,7 +58,12 @@ const BookingForm = ({
     const bookingData = {
       ...data,
       totalPrice: total,
-      propertyName: property.name,
+      property: {
+        id: property.id,
+        name: property.name,
+        address: property.address,
+        image: property.images[0].original,
+      },
     }
     onSubmit(bookingData)
   }
