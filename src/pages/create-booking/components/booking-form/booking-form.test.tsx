@@ -58,4 +58,9 @@ describe('BookingForm', () => {
     )
     expect(screen.getByLabelText('Note')).toHaveValue(formProps.booking.note)
   })
+  it('matches snapshot', () => {
+    render(<BookingForm {...formProps} />)
+
+    expect(screen.getByTestId('BookingForm')).toMatchSnapshot()
+  })
 })

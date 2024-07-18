@@ -76,6 +76,7 @@ const BookingForm = ({
           e.preventDefault()
           void handleSubmit(beforeSubmit)(e)
         }}
+        data-testid="BookingForm"
       >
         <Typography className="text-lg font-bold">
           {formatCurrency('usd', property.price)}
