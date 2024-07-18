@@ -9,6 +9,7 @@ import { differenceInDays } from 'date-fns/differenceInDays'
 import { addDays } from 'date-fns/addDays'
 import { areIntervalsOverlapping } from 'date-fns/areIntervalsOverlapping'
 import { Property } from '@/types/property'
+import { formatCurrency } from '@/utils/formatCurrency'
 
 type BookingFormProps = {
   booking?: Booking
@@ -44,7 +45,8 @@ const BookingForm = ({
   const numberOfNights =
     startDate && endDate ? differenceInDays(endDate, startDate) : 0
   const total = numberOfNights * property.price
-  const isDateSelected = (date: Booking['date']) => Boolean(date[0] && date[1])
+  const isDateSelected = (date: Booking['date']) =>
+    Boolean(date[0] && date[1]) || 'Date is required'
 
   const areOverlapping = (date: [Date | null, Date | null]) =>
     bookedDates.some((item) =>
@@ -79,7 +81,7 @@ const BookingForm = ({
         }}
       >
         <Typography className="text-lg font-bold">
-          $ {property.price}{' '}
+          {formatCurrency('usd', property.price)}
           <Typography className="text-sm font-bold" variant="span">
             / night
           </Typography>
@@ -87,7 +89,7 @@ const BookingForm = ({
         <div>
           {!!numberOfNights && (
             <Typography className="text-sm font-bold text-blue-700">
-              $ {total} total for {numberOfNights} nights
+              {formatCurrency('usd', total)} total for {numberOfNights} nights
             </Typography>
           )}
         </div>

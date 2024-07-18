@@ -1,6 +1,5 @@
 import Typography from '@/components/typography/typography'
 import { CheckCircleIcon } from '@heroicons/react/16/solid'
-// import Typography from '@/components/typography/typography'
 
 type AmenitiesProps = {
   amenities: string[]

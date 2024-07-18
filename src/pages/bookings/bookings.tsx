@@ -1,13 +1,16 @@
 import Typography from '@/components/typography/typography'
 import BookingCard from './components/booking-card/booking-card'
-import houseImage from '@/assets/vacation-house.jpg'
 import { Link } from 'react-router-dom'
 import Button from '@/components/button/button'
 import ConfirmationDialog from '@/components/confirmation-dialog/confirmation-dialog'
 import { useState } from 'react'
+import { useBookingsStore } from '@/stores/bookings'
+import { InformationCircleIcon } from '@heroicons/react/16/solid'
 
 const Bookings = (): React.JSX.Element => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const bookings = useBookingsStore((state) => state.bookings)
+
   return (
     <>
       <div className="mb-4 flex items-center justify-between">
@@ -17,24 +20,22 @@ const Bookings = (): React.JSX.Element => {
         </Link>
       </div>
       <div className="flex flex-col space-y-4">
-        <BookingCard
-          title="Vacation house"
-          image={houseImage}
-          startDate={new Date('2024-06-21')}
-          endDate={new Date('2024-06-28')}
-          price={1920}
-          onEdit={() => 1}
-          onDelete={() => setIsDialogOpen(true)}
-        />
-        <BookingCard
-          title="Vacation house"
-          image={houseImage}
-          startDate={new Date('2024-06-21')}
-          endDate={new Date('2024-06-28')}
-          price={1920}
-          onEdit={() => 1}
-          onDelete={() => setIsDialogOpen(true)}
-        />
+        {!bookings.length && (
+          <div className="mt-24 flex h-full w-full items-center justify-center space-x-3 rounded-lg px-2 py-8 shadow-md md:px-0">
+            <InformationCircleIcon className="size-12 text-gray-500" />
+            <Typography className="text-lg text-gray-500">
+              No bookings added, your bookings will be displayed here.
+            </Typography>
+          </div>
+        )}
+        {bookings.map((booking) => (
+          <BookingCard
+            key={booking.id}
+            booking={booking}
+            onEdit={() => 1}
+            onDelete={() => setIsDialogOpen(true)}
+          />
+        ))}
       </div>
       <ConfirmationDialog
         isOpen={isDialogOpen}
