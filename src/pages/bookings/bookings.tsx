@@ -6,10 +6,18 @@ import ConfirmationDialog from '@/components/confirmation-dialog/confirmation-di
 import { useState } from 'react'
 import { useBookingsStore } from '@/stores/bookings'
 import { InformationCircleIcon } from '@heroicons/react/16/solid'
+import { Booking } from '@/types/booking'
 
 const Bookings = (): React.JSX.Element => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [selectedBooking, setSelectedBooking] = useState<Booking>()
   const bookings = useBookingsStore((state) => state.bookings)
+  const deleteBooking = useBookingsStore((state) => state.deleteBooking)
+
+  const handleDeleteClick = (booking: Booking) => {
+    setIsDialogOpen(true)
+    setSelectedBooking(booking)
+  }
 
   return (
     <>
@@ -33,7 +41,7 @@ const Bookings = (): React.JSX.Element => {
             key={booking.id}
             booking={booking}
             onEdit={() => 1}
-            onDelete={() => setIsDialogOpen(true)}
+            onDelete={() => handleDeleteClick(booking)}
           />
         ))}
       </div>
@@ -42,8 +50,7 @@ const Bookings = (): React.JSX.Element => {
         onClose={() => setIsDialogOpen(false)}
         title="Delete Booking"
         description="Are you sure you want to delete your booking? All of your data will be permanently removed."
-        onCancel={() => 0}
-        onConfirm={() => 1}
+        onConfirm={() => !!selectedBooking && deleteBooking(selectedBooking)}
       />
     </>
   )

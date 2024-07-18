@@ -12,7 +12,7 @@ type ConfirmationDialogProps = {
   description: string
   isOpen: boolean
   onClose: () => void
-  onCancel: () => void
+  onCancel?: () => void
   onConfirm: () => void
 }
 
@@ -25,7 +25,7 @@ const ConfirmationDialog = ({
   onConfirm,
 }: ConfirmationDialogProps): React.JSX.Element => {
   const handleCancel = () => {
-    onCancel()
+    onCancel && onCancel()
     onClose()
   }
   const handleConfirm = () => {
