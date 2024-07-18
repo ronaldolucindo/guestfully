@@ -18,6 +18,8 @@ Simple client-side React application implementing a small booking system
 
 `npm run dev`
 
+It will run the application on `http://localhost:5173/`
+
 ### Run tests
 
 `npm run test`
@@ -37,4 +39,5 @@ Simple client-side React application implementing a small booking system
 ## Notes
 
 - Since this is only client-side application there is no data persistion after refreshing the page
-- For the sake of simplicity this uses mock data for property and at the moment it's possible to book only one property
+- For the sake of simplicity this uses mock data for property and at the moment it's possible to book only for one property
+- Many actions perfomed on the app like simulating query bookingId, get booked dates for a property etc, should be handle by backend on a real world application
