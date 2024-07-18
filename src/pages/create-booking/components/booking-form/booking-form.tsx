@@ -1,28 +1,32 @@
 import Button from '@/components/button/button'
 import Typography from '@/components/typography/typography'
-import { Booking } from '@/types/booking'
+import { Booking, DateInterval } from '@/types/booking'
 import { Field, Label, Select, Textarea } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import { Controller, useForm } from 'react-hook-form'
 import DatePicker from 'react-datepicker'
 import { differenceInDays } from 'date-fns/differenceInDays'
 import { addDays } from 'date-fns/addDays'
+import { areIntervalsOverlapping } from 'date-fns/areIntervalsOverlapping'
 
 type BookingFormProps = {
   booking?: Booking
   pricePerNight: number
   maxGuests: number
-  // onSubmit: () => void
+  bookedDates: DateInterval[]
+  onSubmit: (data: Booking) => void
 }
 
 const BookingForm = ({
   pricePerNight,
   maxGuests,
-  // onSubmit,
+  bookedDates,
+  onSubmit,
 }: BookingFormProps): React.JSX.Element => {
   const {
     register,
-    // setValue,
+    setError,
+    clearErrors,
     handleSubmit,
     control,
     watch,
@@ -35,9 +39,7 @@ const BookingForm = ({
       date: [undefined, undefined],
     },
   })
-  const onSubmit = (data: Booking) => {
-    console.log(data)
-  }
+
   const guestOptions = Array.from({ length: maxGuests }, (_x, i) => i + 1)
   const [startDate, endDate] = watch('date')
   const dateLimit = startDate ? addDays(startDate, 60) : undefined
@@ -45,6 +47,14 @@ const BookingForm = ({
     startDate && endDate ? differenceInDays(endDate, startDate) : 0
   const total = numberOfNights * pricePerNight
   const isDateSelected = (date: Booking['date']) => Boolean(date[0] && date[1])
+
+  const areOverlapping = (date: [Date | null, Date | null]) =>
+    bookedDates.some((item) =>
+      areIntervalsOverlapping(
+        { start: date[0] ?? '', end: date[1] ?? '' },
+        item,
+      ),
+    )
 
   return (
     <div className="md:p-x-8 flex h-4/5 w-full flex-col rounded-lg bg-white p-4 shadow-md md:sticky md:top-24">
@@ -69,7 +79,6 @@ const BookingForm = ({
             </Typography>
           )}
         </div>
-
         <Field className="my-2">
           <Label className="text-sm font-bold">Date</Label>
           <div className="w-full">
@@ -86,19 +95,30 @@ const BookingForm = ({
                   selectsRange={true}
                   className={`mt-1 block w-full rounded-lg bg-slate-100 px-3 py-2 text-sm/6 data-[focus]:outline-2 data-[focus]:outline-white/25 ${errors.date ? 'border-2 border-red-500' : ''}`}
                   wrapperClassName="w-full"
-                  onChange={(date) => field.onChange(date)}
+                  onChange={(date) => {
+                    // should prevent user from selecting overlapping ranges
+                    if (areOverlapping(date)) {
+                      setError('date', {
+                        type: 'manual',
+                        message: 'Selected range includes booked dates',
+                      })
+                      return field.onChange([undefined, undefined])
+                    }
+                    clearErrors('date')
+                    return field.onChange(date)
+                  }}
                   startDate={field.value?.[0]}
                   endDate={field.value?.[1]}
-                  // TODO: Add booked intervals to show as unavailable
-                  // excludeDateIntervals={}
+                  excludeDateIntervals={bookedDates}
                   isClearable={true}
+                  onKeyDown={(e) => e.preventDefault()}
                 />
               )}
             />
           </div>
           {errors?.date && (
             <Typography className="text-sm text-red-600">
-              Field required
+              {errors.date?.message}
             </Typography>
           )}
         </Field>
